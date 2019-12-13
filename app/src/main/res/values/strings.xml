@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Trip App</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="von">Von</string>
+    <string name="erforderlich">erforderlich</string>
+    <string name="abreisedatum">Abreisedatum</string>
+    <string name="uhrzeit">Uhrzeit</string>
+    <string name="nach">Nach</string>
+    <string name="save">Save</string>
+</resources>
