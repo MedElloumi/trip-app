@@ -11,7 +11,7 @@ public class Client {
         OkHttpClient okHttpClient = builder.build();
 
         final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://google.com")
+                .baseUrl("https://api.myjson.com/bins/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();

@@ -6,6 +6,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface CitiesService {
-    @GET("cities")
+    @GET("7n29s")
     Call<ArrayList<String>> getCities();
 }

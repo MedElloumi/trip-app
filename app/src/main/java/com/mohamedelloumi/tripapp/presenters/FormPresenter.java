@@ -1,16 +1,24 @@
 package com.mohamedelloumi.tripapp.presenters;
 
 import android.databinding.ObservableArrayList;
+import android.databinding.ObservableField;
 
 import com.mohamedelloumi.tripapp.logic.CitiesLogic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import retrofit2.Response;
 
 public class FormPresenter implements CitiesLogic.CitiesInterface {
-    // citiesList will contains German cities after consuming the Rest API, I will use this list as an input for both departure and arrival address
-    public ObservableArrayList<String> citiesList = new ObservableArrayList<>();
+
+    public final ObservableArrayList<String> citiesList = new ObservableArrayList<>();
+    public final ObservableField<String> departureAddress = new ObservableField<>();
+    public final ObservableField<String> departureDate = new ObservableField<>();
+    public final ObservableField<String> departureTime = new ObservableField<>();
+    public final ObservableField<String> arrivalAddress = new ObservableField<>();
+    public final ObservableField<String> arrivalDate = new ObservableField<>();
+    public final ObservableField<String> arrivalTime = new ObservableField<>();
 
     public FormPresenter() {
         CitiesLogic citiesLogic = new CitiesLogic(this);
@@ -37,5 +45,6 @@ public class FormPresenter implements CitiesLogic.CitiesInterface {
 
     @Override
     public void onCitiesFailure(Throwable t) {
+        System.out.println(Arrays.toString(t.getStackTrace()));
     }
 }
