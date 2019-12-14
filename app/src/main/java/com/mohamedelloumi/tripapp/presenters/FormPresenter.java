@@ -14,7 +14,7 @@ public class FormPresenter implements CitiesLogic.CitiesInterface {
 
     public final ObservableArrayList<String> citiesList = new ObservableArrayList<>();
     public final ObservableField<String> departureAddress = new ObservableField<>();
-    public final ObservableField<String> departureDate = new ObservableField<>();
+    public ObservableField<String> departureDate = new ObservableField<>();
     public final ObservableField<String> departureTime = new ObservableField<>();
     public final ObservableField<String> arrivalAddress = new ObservableField<>();
     public final ObservableField<String> arrivalDate = new ObservableField<>();
@@ -31,8 +31,17 @@ public class FormPresenter implements CitiesLogic.CitiesInterface {
      *
      * @return
      */
-    private boolean isValid() {
-        return false;
+    private boolean isValidForm() {
+        return true;
+    }
+
+    public void saveTripData() {
+        if (isValidForm()) {
+            System.out.println(departureAddress.get());
+            System.out.println(arrivalAddress.get());
+            System.out.println(departureDate.get());
+            System.out.println(departureTime.get());
+        }
     }
 
     @Override
