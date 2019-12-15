@@ -17,21 +17,39 @@ public class TripLogic {
         TripLogic.tripInterface = tripInterface;
     }
 
+    /**
+     * Insert a trip into local Storage using room using an Async Task wrapper
+     * @param trip The trip to be inserted
+     * @param db
+     */
     public void insertTrip(Trip trip, TripRoomDatabase db) {
         TripDao tripDao = db.tripDao();
         new insertTripAsyncTask(tripDao).execute(trip);
     }
 
+    /**
+     * Insert a trip into cloud Storage using an Async Task wrapper
+     * @param trip The trip to be inserted
+     * @param db
+     */
     public void insertCloudTrip(MockedCloudTrip trip, TripRoomDatabase db) {
         TripDao tripDao = db.tripDao();
         new insertCloudTripAsyncTask(tripDao).execute(trip);
     }
 
+    /**
+     * Select Trips that are saved locally using an Async Task wrapper
+     * @param db
+     */
     public void selectLocalTrips(TripRoomDatabase db) {
         TripDao tripDao = db.tripDao();
         new selectLocalTripsAsyncTask(tripDao).execute();
     }
 
+    /**
+     * Select Trips that are saved remotely using an Async Task wrapper
+     * @param db
+     */
     public void selectRemoteTrips(TripRoomDatabase db) {
         TripDao tripDao = db.tripDao();
         new selectRemoteTripsAsyncTask(tripDao).execute();

@@ -53,11 +53,18 @@ public class FormFragment extends Fragment implements FormPresenter.RequiredView
         super.onViewCreated(view, savedInstanceState);
     }
 
+    /**
+     * Show a short toast
+     * @param msg messgae to show within Toast
+     */
     @Override
     public void showToast(String msg) {
         Toast.makeText(getContext().getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Initialize a PeriodicWorkRequest using the ConnectivityStatusWorker class and start this request
+     */
     private void startConnectivityWorker() {
         Constraints constraints = new Constraints.Builder()
                 .setRequiresCharging(true)

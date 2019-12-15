@@ -29,6 +29,11 @@ public class ConnectivityStatusWorker extends Worker {
         return null;
     }
 
+    /**
+     * check if we are connected to an Internet connection or no
+     * copy pasted from here: https://developer.android.com/training/monitoring-device-state/connectivity-status-type#java
+     * @return
+     */
     private boolean isConnected() {
         ConnectivityManager cm =
                 (ConnectivityManager) ApplicationContext.get().getSystemService(Context.CONNECTIVITY_SERVICE);

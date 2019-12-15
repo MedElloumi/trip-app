@@ -19,6 +19,9 @@ public class CitiesLogic {
         this.citiesInterface = citiesInterface;
     }
 
+    /**
+     * Return list of German list Asynchronously
+     */
     public void returnGermanCities() {
         Call<ArrayList<String>> call = citiesService.getCities();
         call.enqueue(new Callback<ArrayList<String>>() {

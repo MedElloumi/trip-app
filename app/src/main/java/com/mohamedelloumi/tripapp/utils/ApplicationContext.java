@@ -2,6 +2,10 @@ package com.mohamedelloumi.tripapp.utils;
 
 import android.content.Context;
 
+/**
+ * An utility class to access context outside an activity or fragment
+ * Copy Pasted from the internet
+ */
 public class ApplicationContext {
     private Context appContext;
 
