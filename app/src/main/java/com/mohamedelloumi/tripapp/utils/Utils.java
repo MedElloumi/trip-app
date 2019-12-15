@@ -5,6 +5,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 public class Utils {
     public static String loadJSONFromAsset(String fileName) {
@@ -15,7 +16,7 @@ public class Utils {
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            json = new String(buffer, "UTF-8");
+            json = new String(buffer, StandardCharsets.UTF_8);
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;

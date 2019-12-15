@@ -1,9 +1,14 @@
 package com.mohamedelloumi.tripapp.ui.fragments;
 
 
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +17,14 @@ import android.widget.Toast;
 import com.mohamedelloumi.tripapp.R;
 import com.mohamedelloumi.tripapp.databinding.FragmentFormBinding;
 import com.mohamedelloumi.tripapp.presenters.FormPresenter;
-import com.mohamedelloumi.tripapp.utils.TripRoomDatabase;
+import com.mohamedelloumi.tripapp.utils.ConnectivityStatusWorker;
+import com.mohamedelloumi.tripapp.db.TripRoomDatabase;
+
+import java.util.concurrent.TimeUnit;
+
+import androidx.work.Constraints;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,7 +48,27 @@ public class FormFragment extends Fragment implements FormPresenter.RequiredView
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        startConnectivityWorker();
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
     public void showToast(String msg) {
         Toast.makeText(getContext().getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    private void startConnectivityWorker() {
+        Constraints constraints = new Constraints.Builder()
+                .setRequiresCharging(true)
+                .build();
+
+        PeriodicWorkRequest saveRequest =
+                new PeriodicWorkRequest.Builder(ConnectivityStatusWorker.class, 15, TimeUnit.MINUTES)
+                        .setConstraints(constraints)
+                        .build();
+
+        WorkManager.getInstance(getContext().getApplicationContext())
+                .enqueue(saveRequest);
     }
 }

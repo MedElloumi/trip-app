@@ -1,14 +1,15 @@
-package com.mohamedelloumi.tripapp.utils;
+package com.mohamedelloumi.tripapp.db;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 import android.content.Context;
 
 import com.mohamedelloumi.tripapp.dao.TripDao;
+import com.mohamedelloumi.tripapp.models.MockedCloudTrip;
 import com.mohamedelloumi.tripapp.models.Trip;
 
-@Database(entities = {Trip.class}, version = 1, exportSchema = false)
+@Database(entities = {Trip.class, MockedCloudTrip.class}, version = 1, exportSchema = false)
 public abstract class TripRoomDatabase extends RoomDatabase {
     public abstract TripDao tripDao();
 

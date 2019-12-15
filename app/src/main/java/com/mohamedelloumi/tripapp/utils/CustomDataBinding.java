@@ -2,9 +2,9 @@ package com.mohamedelloumi.tripapp.utils;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.databinding.BindingAdapter;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableField;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableField;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;

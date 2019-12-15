@@ -1,29 +1,38 @@
 package com.mohamedelloumi.tripapp.logic;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import com.mohamedelloumi.tripapp.dao.TripDao;
+import com.mohamedelloumi.tripapp.models.MockedCloudTrip;
 import com.mohamedelloumi.tripapp.models.Trip;
-import com.mohamedelloumi.tripapp.utils.TripRoomDatabase;
+import com.mohamedelloumi.tripapp.db.TripRoomDatabase;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class TripLogic {
 
-    private TripInterface tripInterface;
+    private static TripInterface tripInterface;
 
     public TripLogic(TripInterface tripInterface) {
-        this.tripInterface = tripInterface;
+        TripLogic.tripInterface = tripInterface;
     }
 
     public void insertTrip(Trip trip, TripRoomDatabase db) {
-        // TripRoomDatabase db = TripRoomDatabase.getDatabase(application);
         TripDao tripDao = db.tripDao();
         new insertTripAsyncTask(tripDao).execute(trip);
     }
 
-    private class insertTripAsyncTask extends AsyncTask<Trip, Void, Boolean> {
+    public void selectLocalTrips(TripRoomDatabase db) {
+        TripDao tripDao = db.tripDao();
+        new selectLocalTripsAsyncTask(tripDao).execute();
+    }
+
+    public void selectRemoteTrips(TripRoomDatabase db) {
+        TripDao tripDao = db.tripDao();
+        new selectRemoteTripsAsyncTask(tripDao).execute();
+    }
+
+    private static class insertTripAsyncTask extends AsyncTask<Trip, Void, Boolean> {
 
         private TripDao tripDao;
 
@@ -52,9 +61,53 @@ public class TripLogic {
         }
     }
 
+    private static class selectLocalTripsAsyncTask extends AsyncTask<Void, Void, List<Trip>> {
+
+        private TripDao tripDao;
+
+        private selectLocalTripsAsyncTask(TripDao tripDao) {
+            this.tripDao = tripDao;
+        }
+
+        @Override
+        protected void onPostExecute(List<Trip> localTrips) {
+            tripInterface.onSelectLocalTrips(localTrips);
+            super.onPostExecute(localTrips);
+        }
+
+        @Override
+        protected List<Trip> doInBackground(Void... voids) {
+            return tripDao.selectLocalTrips();
+        }
+    }
+
+    private static class selectRemoteTripsAsyncTask extends AsyncTask<Void, Void, List<MockedCloudTrip>> {
+
+        private TripDao tripDao;
+
+        private selectRemoteTripsAsyncTask(TripDao tripDao) {
+            this.tripDao = tripDao;
+        }
+
+        @Override
+        protected void onPostExecute(List<MockedCloudTrip> remoteTrips) {
+            tripInterface.onSelectRemoteTrips(remoteTrips);
+            super.onPostExecute(remoteTrips);
+        }
+
+        @Override
+        protected List<MockedCloudTrip> doInBackground(Void... voids) {
+            return tripDao.selectRemoteTrips();
+        }
+    }
+
     public interface TripInterface {
         void onInsertTripResponse();
 
         void onInsertTripFailure();
+
+        void onSelectLocalTrips(List<Trip> localTrips);
+
+        void onSelectRemoteTrips(List<MockedCloudTrip> cloudTrips);
     }
 }

@@ -1,13 +1,23 @@
 package com.mohamedelloumi.tripapp.dao;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.OnConflictStrategy;
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
 
+import com.mohamedelloumi.tripapp.models.MockedCloudTrip;
 import com.mohamedelloumi.tripapp.models.Trip;
+
+import java.util.List;
 
 @Dao
 public interface TripDao {
-    @Insert(onConflict = OnConflictStrategy.FAIL)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertTrip(Trip trip);
+
+    @Query("SELECT * FROM trip_table")
+    List<Trip> selectLocalTrips();
+
+    @Query("SELECT * FROM mocked_cloud_trip_table")
+    List<MockedCloudTrip> selectRemoteTrips();
 }

@@ -5,8 +5,11 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
 
-@Entity(tableName = "trip_table")
-public class Trip {
+/**
+ * The following class act as a cloud SQL table
+ */
+@Entity(tableName = "mocked_cloud_trip_table")
+public class MockedCloudTrip {
     @PrimaryKey
     @ColumnInfo(name = "id")
     private int id;
@@ -35,7 +38,7 @@ public class Trip {
     @ColumnInfo(name = "arrivalTime")
     private String arrivalTime;
 
-    public Trip(@NonNull int id, @NonNull String departureAddress, @NonNull String departureDate, @NonNull String departureTime, @NonNull String arrivalAddress, @NonNull String arrivalDate, @NonNull String arrivalTime) {
+    public MockedCloudTrip(int id, @NonNull String departureAddress, @NonNull String departureDate, @NonNull String departureTime, @NonNull String arrivalAddress, @NonNull String arrivalDate, @NonNull String arrivalTime) {
         this.id = id;
         this.departureAddress = departureAddress;
         this.departureDate = departureDate;
