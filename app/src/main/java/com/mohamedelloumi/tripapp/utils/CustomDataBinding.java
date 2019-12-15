@@ -87,7 +87,7 @@ public class CustomDataBinding {
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new TimePickerDialog(editText.getContext(), selectTime(calendar, departureTime,arrivalTime), calendar
+                new TimePickerDialog(editText.getContext(), selectTime(calendar, departureTime, arrivalTime), calendar
                         .get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
             }
         });
@@ -109,7 +109,7 @@ public class CustomDataBinding {
         final Calendar currentDate = Calendar.getInstance();
         currentDate.set(Calendar.HOUR_OF_DAY, 23);
         currentDate.set(Calendar.MINUTE, 59);
-        String requiredFormat = "HH.mm";
+        String requiredFormat = "HH:mm";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(requiredFormat, Locale.GERMANY);
         departureTime.set(simpleDateFormat.format(calendar.getTime()));
         arrivalTime.set(simpleDateFormat.format(currentDate.getTime()));

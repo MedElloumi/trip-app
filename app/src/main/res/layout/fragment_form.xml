@@ -37,6 +37,7 @@
 
             <AutoCompleteTextView
                 android:id="@+id/departureEditText"
+                style="@style/inputStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
@@ -102,7 +103,7 @@
 
             <EditText
                 android:id="@+id/departureDateEditText"
-                style="@style/labelStyle"
+                style="@style/inputStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -134,7 +135,7 @@
 
             <EditText
                 android:id="@+id/departureTimeEditText"
-                style="@style/labelStyle"
+                style="@style/inputStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
@@ -142,12 +143,12 @@
                 android:inputType="time"
                 android:longClickable="false"
                 android:text="@{presenter.departureTime}"
+                app:arrivalTime="@{presenter.arrivalTime}"
+                app:departureTime="@{presenter.departureTime}"
                 app:layout_constraintBottom_toBottomOf="@+id/departureDateEditText"
                 app:layout_constraintEnd_toEndOf="@+id/departureTimeTextView"
                 app:layout_constraintStart_toStartOf="@+id/departureTimeTextView"
                 app:layout_constraintTop_toTopOf="@+id/departureDateEditText"
-                app:departureTime="@{presenter.departureTime}"
-                app:arrivalTime="@{presenter.arrivalTime}"
                 tools:ignore="LabelFor"
                 tools:targetApi="o" />
 
@@ -170,6 +171,7 @@
 
             <AutoCompleteTextView
                 android:id="@+id/arrivalEditText"
+                style="@style/inputStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
@@ -234,9 +236,11 @@
 
             <EditText
                 android:id="@+id/arrivalDateEditText"
+                style="@style/inputStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
+                android:editable="false"
                 android:focusable="false"
                 android:importantForAutofill="no"
                 android:inputType="date"
@@ -250,10 +254,11 @@
 
             <EditText
                 android:id="@+id/arrivalTimeEditText"
-                style="@style/labelStyle"
+                style="@style/inputStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
+                android:editable="false"
                 android:focusable="false"
                 android:importantForAutofill="no"
                 android:inputType="date"

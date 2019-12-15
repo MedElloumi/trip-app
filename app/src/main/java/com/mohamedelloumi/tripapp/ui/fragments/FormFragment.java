@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.mohamedelloumi.tripapp.R;
 import com.mohamedelloumi.tripapp.databinding.FragmentFormBinding;
 import com.mohamedelloumi.tripapp.presenters.FormPresenter;
+import com.mohamedelloumi.tripapp.utils.TripRoomDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +29,8 @@ public class FormFragment extends Fragment {
                              Bundle savedInstanceState) {
         FragmentFormBinding binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_form, container, false);
-        binding.setPresenter(new FormPresenter());
+        TripRoomDatabase db = TripRoomDatabase.getDatabase(getContext().getApplicationContext());
+        binding.setPresenter(new FormPresenter(db));
         return binding.getRoot();
     }
 

@@ -15,4 +15,11 @@
 
     </style>
 
+    <style name="inputStyle">
+
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#6F9BF0</item>>
+
+    </style>
+
 </resources>
