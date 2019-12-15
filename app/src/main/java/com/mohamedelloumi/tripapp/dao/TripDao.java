@@ -8,6 +8,6 @@ import com.mohamedelloumi.tripapp.models.Trip;
 
 @Dao
 public interface TripDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.FAIL)
     void insertTrip(Trip trip);
 }

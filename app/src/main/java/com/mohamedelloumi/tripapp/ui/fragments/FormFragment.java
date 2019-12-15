@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.mohamedelloumi.tripapp.R;
 import com.mohamedelloumi.tripapp.databinding.FragmentFormBinding;
@@ -16,7 +17,7 @@ import com.mohamedelloumi.tripapp.utils.TripRoomDatabase;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FormFragment extends Fragment {
+public class FormFragment extends Fragment implements FormPresenter.RequiredViewOps {
 
 
     public FormFragment() {
@@ -30,8 +31,12 @@ public class FormFragment extends Fragment {
         FragmentFormBinding binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_form, container, false);
         TripRoomDatabase db = TripRoomDatabase.getDatabase(getContext().getApplicationContext());
-        binding.setPresenter(new FormPresenter(db));
+        binding.setPresenter(new FormPresenter(db, this));
         return binding.getRoot();
     }
 
+    @Override
+    public void showToast(String msg) {
+        Toast.makeText(getContext().getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
 }
