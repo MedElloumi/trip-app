@@ -20,4 +20,7 @@ public interface TripDao {
 
     @Query("SELECT * FROM mocked_cloud_trip_table")
     List<MockedCloudTrip> selectRemoteTrips();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertCloudTrip(MockedCloudTrip trip);
 }

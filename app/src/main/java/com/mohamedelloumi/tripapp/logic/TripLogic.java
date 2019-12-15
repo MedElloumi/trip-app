@@ -22,6 +22,11 @@ public class TripLogic {
         new insertTripAsyncTask(tripDao).execute(trip);
     }
 
+    public void insertCloudTrip(MockedCloudTrip trip, TripRoomDatabase db) {
+        TripDao tripDao = db.tripDao();
+        new insertCloudTripAsyncTask(tripDao).execute(trip);
+    }
+
     public void selectLocalTrips(TripRoomDatabase db) {
         TripDao tripDao = db.tripDao();
         new selectLocalTripsAsyncTask(tripDao).execute();
@@ -101,6 +106,35 @@ public class TripLogic {
         }
     }
 
+    private static class insertCloudTripAsyncTask extends AsyncTask<MockedCloudTrip, Void, Boolean> {
+
+        private TripDao tripDao;
+
+        private insertCloudTripAsyncTask(TripDao tripDao) {
+            this.tripDao = tripDao;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                tripInterface.onInsertCloudTripResponse();
+            } else {
+                tripInterface.onInsertCloudTripFailure();
+            }
+        }
+
+        @Override
+        protected final Boolean doInBackground(MockedCloudTrip... lists) {
+            try {
+                tripDao.insertCloudTrip(lists[0]);
+                return true;
+            } catch (Exception e) {
+                System.out.println(e);
+                return false;
+            }
+        }
+    }
+
     public interface TripInterface {
         void onInsertTripResponse();
 
@@ -109,5 +143,9 @@ public class TripLogic {
         void onSelectLocalTrips(List<Trip> localTrips);
 
         void onSelectRemoteTrips(List<MockedCloudTrip> cloudTrips);
+
+        void onInsertCloudTripResponse();
+
+        void onInsertCloudTripFailure();
     }
 }

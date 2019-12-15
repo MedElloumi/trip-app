@@ -64,7 +64,7 @@ public class FormPresenter implements CitiesLogic.CitiesInterface, TripLogic.Tri
     public void saveTripData() {
         if (isValidForm()) {
             TripLogic tripLogic = new TripLogic(this);
-            Trip trip = new Trip(1, departureAddress.get(), departureDate.get(), departureTime.get(), arrivalAddress.get(), arrivalDate.get(), arrivalTime.get());
+            Trip trip = new Trip( departureAddress.get(), departureDate.get(), departureTime.get(), arrivalAddress.get(), arrivalDate.get(), arrivalTime.get());
             tripLogic.insertTrip(trip, db);
         } else {
             requiredViewOps.showToast("Invalid user input");
@@ -156,24 +156,46 @@ public class FormPresenter implements CitiesLogic.CitiesInterface, TripLogic.Tri
      */
     @Override
     public void onSelectRemoteTrips(List<MockedCloudTrip> cloudTrips) {
+        TripLogic tripLogic = new TripLogic(this);
         if (cloudTrips.size() == 0) {
             requiredViewOps.showToast("Empty cloud data ... continuing synchronisation process");
-            // insert current local trip into cloud trip
+            MockedCloudTrip trip = new MockedCloudTrip(localTrip.getDepartureAddress2(), localTrip.getDepartureDate2(), localTrip.getDepartureTime2(), localTrip.getArrivalAddress2(), localTrip.getArrivalDate2(), localTrip.getArrivalTime2());
+            tripLogic.insertCloudTrip(trip, db);
+
         } else if (cloudTrips.size() >= 1) {
             boolean isLocalTripSynchronised = false;
             for (int i = 0; i < cloudTrips.size(); i++) {
-                if (cloudTrips.get(i).getArrivalAddress().equals(localTrip.getArrivalAddress())) {
+                if (cloudTrips.get(i).getArrivalAddress2().equals(localTrip.getArrivalAddress2())) {
                     isLocalTripSynchronised = true;
                 }
             }
             if (!isLocalTripSynchronised) {
                 requiredViewOps.showToast("Inserting new trip information ...");
-                // insert current local trip into cloud trip
+                MockedCloudTrip trip = new MockedCloudTrip(localTrip.getDepartureAddress2(), localTrip.getDepartureDate2(), localTrip.getDepartureTime2(), localTrip.getArrivalAddress2(), localTrip.getArrivalDate2(), localTrip.getArrivalTime2());
+                tripLogic.insertCloudTrip(trip, db);
             } else {
                 requiredViewOps.showToast("Trip already synchronized ... aborting synchronisation process");
             }
         }
 
+    }
+
+    /**
+     * Interface callback in case our operation to insert the trip into cloud succeed
+     * Therefore show a Toast as indication
+     */
+    @Override
+    public void onInsertCloudTripResponse() {
+        requiredViewOps.showToast("Insert trip into cloud storage succeed");
+    }
+
+    /**
+     * Interface callback in case our operation to insert the trip into cloud failed
+     * Therefore show a Toast as indication
+     */
+    @Override
+    public void onInsertCloudTripFailure() {
+        requiredViewOps.showToast("Insert trip into cloud storage failed");
     }
 
     public interface RequiredViewOps {
@@ -184,6 +206,7 @@ public class FormPresenter implements CitiesLogic.CitiesInterface, TripLogic.Tri
      * EventBus callback fired after receiving the connection status
      * If the user is connected then we might pass to the first step of the synchronisation process which is selecting local saved trips
      * If the user is not connected then just show a Toast
+     *
      * @param isConnected
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
