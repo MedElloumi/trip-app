@@ -20,9 +20,13 @@ User will not be able to save his trip information unless all fields are filled 
 
 ## Assumption 2
 
-An Android worker class is responsible to check the internet connection every 15 minutes. What will happens next will vary according to multiple factors.
+An Android worker class is responsible to check the internet connection every 15 minutes. What will happens next will depends according to multiple factors.
 
 I choosed to explain my approach through this activity diagram: 
+
+[https://pdfhost.io/v/Zodq8Syp_activity_diagrampdf.pdf](https://pdfhost.io/v/Zodq8Syp_activity_diagrampdf.pdf)
+
+To reduce this diagram complexity and size I expected that all request to local storage will be done successfully.
 
 ## Authors
 
