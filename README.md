@@ -34,7 +34,7 @@ Mohamed Elloumi
 
 ## Documentation
 
-See documentation under Online documentation
+See documentation under [https://medelloumi.github.io/](Online Documentation)
 
 
 # Resources
