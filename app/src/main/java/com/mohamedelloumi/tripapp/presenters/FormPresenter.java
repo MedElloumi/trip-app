@@ -210,7 +210,7 @@ public class FormPresenter implements CitiesLogic.CitiesInterface, TripLogic.Tri
      * @param isConnected
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void connectionStatusEvent(boolean isConnected) {
+    public void connectionStatusEvent(Boolean isConnected) {
         System.out.println("winston logs connectionStatusEvent EventBus");
         if (isConnected) {
             TripLogic tripLogic = new TripLogic(this);
