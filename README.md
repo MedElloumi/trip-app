@@ -24,9 +24,9 @@ An Android worker class is responsible to check the internet connection every 15
 
 I choosed to explain my approach through this activity diagram: 
 
-[https://pdfhost.io/v/Zodq8Syp_activity_diagrampdf.pdf](https://pdfhost.io/v/Zodq8Syp_activity_diagrampdf.pdf)
+![Activity Diagram](https://i.imgur.com/kfFLWIg.png)
 
-To reduce this diagram complexity and size I expected that all request to local storage will be done successfully.
+* To reduce this diagram complexity and size I expected that all request to local storage will be done successfully.
 
 ## Authors
 
