@@ -40,3 +40,5 @@ See documentation under Online documentation
 # Resources
 
 - My previous Android projects available within my Github profile
+- Stack Overflow
+- Official Android documentation 
