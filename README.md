@@ -1,3 +1,9 @@
+## What happened after solving this task ? 
+
+I have been invited for on site interview with one of the Top 3 LinkedIn Companies, have been asked few questions about Android in general and this task.
+
+Rejected for the following reason: We have decided not to move your application forward since we are looking for a more junior profile.
+
 ##  Getting Started
 
 The following README file will provide a short introduction about the way I followed to solve this task.
